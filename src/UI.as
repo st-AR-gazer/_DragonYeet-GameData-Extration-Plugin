@@ -35,7 +35,7 @@ void Render() {
 
         UI::InputInt("General", classificationLevelOfHitRoofGeneral);
         UI::SameLine();
-        UI::InputText("Horisontal Eval", classificationLevelOfHitRoofHorisontal);
+        UI::InputInt("Horisontal Eval", classificationLevelOfHitRoofHorisontal);
 
         if (UI::Button("Does the dragonyeet hit the glass?")) { 
             if (classificationDoesHitRoof == true) { 
@@ -69,7 +69,7 @@ void Render() {
     }
 }
 
-void StartRecording(const string &in filename) {
+void StartRecording(const string &in filename, const bool &in classificationDoesHitRoof) {
     if (filename == "") {
         currentStatus = "No filename";
         return;
