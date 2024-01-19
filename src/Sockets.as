@@ -8,7 +8,7 @@ void initializeSocket() {
         return;
     }
 
-    @sock = Net::Socket();
+    Net::Socket@ sock = Net::Socket();
     if (!sock.Listen("127.0.0.1", 9000)) {
         log("Could not initiate server socket on port 9000.", LogLevel::Error, 12);
         return;
