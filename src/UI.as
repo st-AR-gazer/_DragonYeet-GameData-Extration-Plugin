@@ -22,7 +22,7 @@ void Render() {
     if (UI::Begin("DragonYEETs Classifier", showInterface, window_flags)) {
         UI::Text("Status: " + currentStatus);
         UI::InputText("Filename", filename);
-        UI::Button("Does the dragonyeet hit the glass?", classificationDoesHit) { 
+        if (UI::Button("Does the dragonyeet hit the glass?", classificationDoesHit)) { 
             if (classificationDoesHit == true) { classificationDoesHit = false; } else { classificationDoesHit = true; } 
         }
         if (classificationDoesHit == true) {
