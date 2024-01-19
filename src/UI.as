@@ -33,7 +33,7 @@ void Render() {
 
         UI::InputText("Filename", filename);
 
-        UI::InputText("General", classificationLevelOfHitRoofGeneral);
+        UI::InputInt("General", classificationLevelOfHitRoofGeneral);
         UI::SameLine();
         UI::InputText("Horisontal Eval", classificationLevelOfHitRoofHorisontal);
 
