@@ -15,7 +15,7 @@ void Main() {
 
 void Update(float dt) {
     CTrackMania@ app = cast<CTrackMania>(GetApp());
-    if(app is null) { yield(); continue; }
+    if(app is null) { return; }
 
     auto rootMap = cast<CGameCtnChallenge>(app.RootMap);
     filename = rootMap.MapInfo.FileName;
