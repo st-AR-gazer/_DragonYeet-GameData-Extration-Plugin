@@ -10,7 +10,7 @@ int classificationLevelOfHitRoofGeneral;
 int classificationLevelOfHitRoofHorisontal;
 
 void RenderMenu() {
-	if(UI::MenuItem("\\$e44" + Icons::EllipsisH + Icons::EllipsisH + Icons::FighterJet + "\\$z" + "DragonYEETs Classifier", "", showInterface)) {
+	if(UI::MenuItem("\\$e44" + Icons::EllipsisH + Icons::EllipsisH + Icons::FighterJet + "\\$z" + "\\$ADED\\$8CEr\\$8CFa\\$BEEg\\$BCDo\\$76En\\$65CY\\$69EE\\$59AE\\$48BT\\$46Es\\$19F \\$0BFC\\$0CDl\\$0FFa\\$0F7s\\$7FDs\\$6CAi\\$4DCf\\$4EDi\\$2BAe\\$6CAr", "", showInterface)) {
 		showInterface = !showInterface;
 	}
 }
