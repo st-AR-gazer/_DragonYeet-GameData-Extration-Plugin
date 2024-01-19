@@ -69,7 +69,7 @@ void Render() {
     }
 }
 
-void StartRecording(const string &in filename, bool classification) {
+void StartRecording(const string &in filename) {
     if (filename == "") {
         currentStatus = "No filename";
         return;
