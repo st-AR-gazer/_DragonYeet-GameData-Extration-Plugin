@@ -59,10 +59,6 @@ void StartRecording(const string &in filename, bool classification) {
         currentStatus = "No filename";
         return;
     }
-    if (classification is null) {
-        currentStatus = "No classification";
-        return;
-    }
     initializeFile(filename);
     currentStatus = "Recording";
 }
