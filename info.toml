@@ -5,5 +5,4 @@ version = "0.1.0"
 category = "Machine Learning"
 
 [script]
-dependencies = [ "Camera", "VehicleState" ]
-optional_dependencies = [ "PlayerState" ]
+dependencies = [ "VehicleState" ]

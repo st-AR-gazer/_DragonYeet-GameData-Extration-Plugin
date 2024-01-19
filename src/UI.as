@@ -21,15 +21,13 @@ void Render() {
         UI::InputText("Filename", filename);
         UI::InputText("Classification", classification);
 
+        UI::Text("Current filename: `" + filename + "`");
+
         UI::Separator();
         
-        if (UI::Button("Start Recording")) {
-            StartRecording(filename, classification);
-        }
+        if (UI::Button("Start Recording")) { StartRecording(filename, classification); }
         UI::SameLine();
-        if (UI::Button("Stop Recording")) {
-            StopRecording();
-        }
+        if (UI::Button("Stop Recording")) { StopRecording(); }
 
         UI::Separator();
 
@@ -37,9 +35,7 @@ void Render() {
         UI::SameLine(); 
         if (UI::Button("Close Socket")) { closeSocket(); }
         
-        if (UI::Button("Close Resoueces")) {
-            closeResources();
-        }
+        if (UI::Button("Close Resoueces")) { closeResources(); }
         UI::End();
     }
 }
@@ -53,19 +49,10 @@ void StartRecording(const string &in filename, const string &in classification) 
         currentStatus = "No classification";
         return;
     }
+    initializeFile(filename);
     currentStatus = "Recording";
 }
 
 void StopRecording() {
     currentStatus = "Idle";
-}
-
-
-void UICall() {
-    // initializeSocket();
-    
-    while (true) {
-        // ui.Render();
-        yield();
-    }
 }

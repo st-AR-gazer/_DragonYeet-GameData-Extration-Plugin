@@ -8,12 +8,12 @@ IO::File file;
 Net::Socket@ sock;
 
 void Main() {
-    UICall();
-    initializeFile();
-    initializeSocket();
-
     log("Starting data collection");
-    return;
     //collectAndWriteData();
     //closeResources();
+}
+
+void Update(float dt) {
+    
+    filename
 }

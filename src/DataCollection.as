@@ -2,8 +2,11 @@ string filename; // This is set in UI
 
 void initializeFile() {
     file.Open(IO::FromStorageFolder("DragonYEET Saves/" + filename), IO::FileMode::Write);
-    log("File opened successfully for writing: " + filename, LogLevel::Info, 9);
+    log("File opened successfully for writing: `" + filename + "`", LogLevel::Info, 9);
+    string headers = "Speed, FrontSpeed, PosX, PosY, PosZ, InputSteer, InputGasPedal, IsBraking, Acceleration, Jerk, AimYaw, AimPitch, AimRoll, FLSteerAngle, FRSteerAngle, FLSlipCoef, FRSlipCoef, EngineCurGear\n";
+    file.Write(headers);
 }
+
 
 void collectAndWriteData() {
 
@@ -42,17 +45,17 @@ void collectAndWriteData() {
         jerk = acceleration - prev_acceleration;
         prev_speed = speed;
         prev_acceleration = acceleration;
-        isBraking = api.InputIsBraking;
+        isBraking = vehicle.InputIsBraking;
 
         if (file.Size() > 0) {
             append_float_to_file(speed);
             append_float_to_file(vehicle.FrontSpeed);
 
-            append_float_to_file(api.Position.x); 
-            append_float_to_file(api.Position.y);
-            append_float_to_file(api.Position.z);
-            append_float_to_file(api.InputSteer);
-            append_float_to_file(api.InputGasPedal);
+            append_float_to_file(vehicle.Position.x); 
+            append_float_to_file(vehicle.Position.y);
+            append_float_to_file(vehicle.Position.z);
+            append_float_to_file(vehicle.InputSteer);
+            append_float_to_file(vehicle.InputGasPedal);
             append_bool_to_file(isBraking);
 
             append_float_to_file(acceleration);
@@ -69,6 +72,8 @@ void collectAndWriteData() {
             append_float_to_file(vehicle.FRSlipCoef);	
             
             append_float_to_file(api.EngineCurGear);
+
+            file.Write("\n");
 
             yield();
         }
@@ -115,17 +120,17 @@ void collectAndWriteData() {
 
 
 void append_float_to_file(float val) {
-    file.Write(string("" + val) + "\n");
+    file.Write(string("" + val) + ", ");
 }
 
 void append_bool_to_file(bool val) {
     if (val) {
-        file.Write("1\n");
+        file.Write("1, ");
     } else {
-        file.Write("0\n");
+        file.Write("0, ");
     }
 }
 
 // void append_int_to_file(IO::File file, int32 val) {
-//     file.Write(string(float(val)) + "\n");
+//     file.Write(string(float(val)) + ", ");
 // }
