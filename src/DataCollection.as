@@ -1,6 +1,5 @@
-string filename; // This is set in UI
 
-void initializeFile() {
+void initializeFile(string filename) {
     file.Open(IO::FromStorageFolder("DragonYEET Saves/" + filename), IO::FileMode::Write);
     log("File opened successfully for writing: `" + filename + "`", LogLevel::Info, 9);
     string headers = "Speed, FrontSpeed, PosX, PosY, PosZ, InputSteer, InputGasPedal, IsBraking, Acceleration, Jerk, AimYaw, AimPitch, AimRoll, FLSteerAngle, FRSteerAngle, FLSlipCoef, FRSlipCoef, EngineCurGear\n";

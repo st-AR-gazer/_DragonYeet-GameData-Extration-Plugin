@@ -1,7 +1,9 @@
+string filename;
+
 bool showInterface = true;
 string currentStatus = "Idle";
 
-int classificationDoesHit;
+bool classificationDoesHit;
 int classificationLevelOfhit;
 
 void RenderMenu() {
@@ -20,7 +22,9 @@ void Render() {
     if (UI::Begin("DragonYEETs Classifier", showInterface, window_flags)) {
         UI::Text("Status: " + currentStatus);
         UI::InputText("Filename", filename);
-        UI::Button("Does the dragonyeet hit the glass?", classificationDoesHit);
+        UI::Button("Does the dragonyeet hit the glass?", classificationDoesHit) { 
+            if (classificationDoesHit == true) { classificationDoesHit = false; } else { classificationDoesHit = true; } 
+        }
         if (classificationDoesHit == true) {
             UI::Text("The dragonyeet hits the glass");
         } else {
@@ -31,7 +35,7 @@ void Render() {
 
         UI::Separator();
         
-        if (UI::Button("Start Recording")) { StartRecording(filename, classification); }
+        if (UI::Button("Start Recording")) { StartRecording(filename, classificationDoesHit); }
         UI::SameLine();
         if (UI::Button("Stop Recording")) { StopRecording(); }
 
@@ -46,12 +50,12 @@ void Render() {
     }
 }
 
-void StartRecording(const string &in filename, const string &in classification) {
+void StartRecording(const string &in filename, bool classification) {
     if (filename == "") {
         currentStatus = "No filename";
         return;
     }
-    if (classification == "") {
+    if (classification == null) {
         currentStatus = "No classification";
         return;
     }
