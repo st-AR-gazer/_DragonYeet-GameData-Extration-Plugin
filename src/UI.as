@@ -1,6 +1,8 @@
 bool showInterface = true;
 string currentStatus = "Idle";
 
+int classificationDoesHit;
+int classificationLevelOfhit;
 
 void RenderMenu() {
 	if(UI::MenuItem("\\$e44" + Icons::EllipsisH + Icons::EllipsisH + Icons::FighterJet + "\\$z DragonYEETs Clasifier", "", showInterface)) {
@@ -9,7 +11,6 @@ void RenderMenu() {
 }
 
 
-string classification;
 
 void Render() {
     if (!showInterface) { return; }
@@ -19,7 +20,12 @@ void Render() {
     if (UI::Begin("DragonYEETs Classifier", showInterface, window_flags)) {
         UI::Text("Status: " + currentStatus);
         UI::InputText("Filename", filename);
-        UI::InputText("Classification", classification);
+        UI::Button("Does the dragonyeet hit the glass?", classificationDoesHit);
+        if (classificationDoesHit == true) {
+            UI::Text("The dragonyeet hits the glass");
+        } else {
+            UI::Text("The dragonyeet does not hit the glass");
+        }
 
         UI::Text("Current filename: `" + filename + "`");
 
