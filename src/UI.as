@@ -59,7 +59,7 @@ void StartRecording(const string &in filename, bool classification) {
         currentStatus = "No filename";
         return;
     }
-    if (classification == null) {
+    if (classification is null) {
         currentStatus = "No classification";
         return;
     }
