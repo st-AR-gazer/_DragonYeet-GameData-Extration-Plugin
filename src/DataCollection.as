@@ -9,7 +9,7 @@ void initializeFile(string filename) {
 
 void collectAndWriteData() {
 
-    openSocket();
+    // openSocket();
 
     float prev_speed = 0;
     float speed = 0;
@@ -124,9 +124,9 @@ void append_float_to_file(float val) {
 
 void append_bool_to_file(bool val) {
     if (val) {
-        file.Write("1, ");
+        file.Write("true, ");
     } else {
-        file.Write("0, ");
+        file.Write("false, ");
     }
 }
 

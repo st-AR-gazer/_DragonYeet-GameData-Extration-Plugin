@@ -75,6 +75,7 @@ void StartRecording(const string &in filename, const bool &in classificationDoes
         return;
     }
     initializeFile(filename);
+    collectAndWriteData();
     currentStatus = "Recording";
 }
 
