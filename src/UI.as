@@ -54,9 +54,9 @@ void Render() {
 
         UI::Separator();
         
-        if (UI::Button("Start Recording")) { StartRecording(filename, classificationDoesHitRoof); }
+        if (UI::Button("Start Recording (file)")) { StartRecording(filename, classificationDoesHitRoof); }
         UI::SameLine();
-        if (UI::Button("Stop Recording")) { StopRecording(); }
+        if (UI::Button("Stop Recording (file)")) { StopRecording(); }
 
         UI::Separator();
 
