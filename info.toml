@@ -3,3 +3,7 @@ name = "DragonYEET; data extraction plugin for ML"
 author = "ar....."
 version = "0.1.0"
 category = "Machine Learning"
+
+[script]
+dependencies = [ "Camera", "VehicleState" ]
+optional_dependencies = [ "PlayerState" ]

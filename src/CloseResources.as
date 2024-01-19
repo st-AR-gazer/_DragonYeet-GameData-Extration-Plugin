@@ -1,5 +1,5 @@
-void closeResources(IO::File@ &file, Net::Socket@ &sock) {
-    if (file !is null) {
+void closeResources() {
+    if (file.Size() > 0) {
         file.Close();
         log("File closed successfully.", LogLevel::Info, 4);
     }

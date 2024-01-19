@@ -1,16 +1,11 @@
-
 string filename; // This is set in UI
 
-void initializeFile(IO::File@ &file) {
-    @file = IO::Open(filename, IO::FileMode::Write);
-    if (file is null) {
-        log("Could not open file for writing: " + filename, LogLevel::Error, 7);
-    } else {
-        log("File opened successfully for writing: " + filename, LogLevel::Info, 9);
-    }
+void initializeFile() {
+    file.Open(IO::FromStorageFolder("DragonYEET Saves/" + filename), IO::FileMode::Write);
+    log("File opened successfully for writing: " + filename, LogLevel::Info, 9);
 }
 
-void collectAndWriteData(IO::File@ &file, Net::Socket@ &sock) {
+void collectAndWriteData() {
 
     openSocket();
 
@@ -49,31 +44,31 @@ void collectAndWriteData(IO::File@ &file, Net::Socket@ &sock) {
         prev_acceleration = acceleration;
         isBraking = api.InputIsBraking;
 
-        if (file !is null) {
-            append_float_to_file(file, speed);
-            append_float_to_file(file, vehicle.FrontSpeed);
+        if (file.Size() > 0) {
+            append_float_to_file(speed);
+            append_float_to_file(vehicle.FrontSpeed);
 
-            append_float_to_file(file, api.Position.x); 
-            append_float_to_file(file, api.Position.y);
-            append_float_to_file(file, api.Position.z);
-            append_float_to_file(file, api.InputSteer);
-            append_float_to_file(file, api.InputGasPedal);
-            append_bool_to_file(file, isBraking);
+            append_float_to_file(api.Position.x); 
+            append_float_to_file(api.Position.y);
+            append_float_to_file(api.Position.z);
+            append_float_to_file(api.InputSteer);
+            append_float_to_file(api.InputGasPedal);
+            append_bool_to_file(isBraking);
 
-            append_float_to_file(file, acceleration);
-            append_float_to_file(file, jerk);
+            append_float_to_file(acceleration);
+            append_float_to_file(jerk);
             
-            append_float_to_file(file, api.AimYaw);
-            append_float_to_file(file, api.AimPitch);
-            append_float_to_file(file, api.AimRoll);
+            append_float_to_file(api.AimYaw);
+            append_float_to_file(api.AimPitch);
+            append_float_to_file(api.AimRoll);
 
-            append_float_to_file(file, vehicle.FLSteerAngle);
-            append_float_to_file(file, vehicle.FRSteerAngle);
+            append_float_to_file(vehicle.FLSteerAngle);
+            append_float_to_file(vehicle.FRSteerAngle);
 
-            append_float_to_file(file, vehicle.FLSlipCoef); 
-            append_float_to_file(file, vehicle.FRSlipCoef);	
+            append_float_to_file(vehicle.FLSlipCoef); 
+            append_float_to_file(vehicle.FRSlipCoef);	
             
-            append_float_to_file(file, api.EngineCurGear);
+            append_float_to_file(api.EngineCurGear);
 
             yield();
         }
@@ -119,14 +114,18 @@ void collectAndWriteData(IO::File@ &file, Net::Socket@ &sock) {
 }
 
 
-void append_float_to_file(IO::File@ file, float val) {
-    file.Write(string(val) + "\n");
+void append_float_to_file(float val) {
+    file.Write(string("" + val) + "\n");
 }
 
-void append_bool_to_file(IO::File@ file, bool val) {
-    file.Write(string(val ? 1.0f : 0.0f) + "\n");
+void append_bool_to_file(bool val) {
+    if (val) {
+        file.Write("1\n");
+    } else {
+        file.Write("0\n");
+    }
 }
 
-void append_int_to_file(IO::File@ file, int32 val) {
-    file.Write(string(float(val)) + "\n");
-}
+// void append_int_to_file(IO::File file, int32 val) {
+//     file.Write(string(float(val)) + "\n");
+// }
