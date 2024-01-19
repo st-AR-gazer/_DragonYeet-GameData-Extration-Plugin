@@ -45,9 +45,9 @@ void Render() {
             } 
         }
         if (classificationDoesHitRoof == true) {
-            UI::Text("The dragonyeet hits the glass");
+            UI::Text("The dragonyeet " + "\\$0f0" + "DOES "     + "\\$z" + "hit the glass");
         } else {
-            UI::Text("The dragonyeet does not hit the glass");
+            UI::Text("The dragonyeet " + "\\$f00" + "DOES NOT " + "\\$z" + "hit the glass");
         }
 
         UI::Text("Current filename: `" + filename + "`");
@@ -80,4 +80,25 @@ void StartRecording(const string &in filename, const bool &in classificationDoes
 
 void StopRecording() {
     currentStatus = "Idle";
+}
+
+bool filenameFlag = false;
+
+void SetFilenameFlag() {
+    CTrackMania@ app = cast<CTrackMania>(GetApp());
+    if(app is null) { return; }
+
+    auto rootMap = cast<CGameCtnChallenge>(app.RootMap);
+    if (rootMap is null) { return; }
+
+    if (rootMap.MapInfo.FileName != filename) {
+        filenameFlag = false;
+    }
+
+    if (!filenameFlag) {
+        filename = rootMap.MapInfo.FileName;
+        if (filename != "") {
+            filenameFlag = true;
+        }
+    }
 }

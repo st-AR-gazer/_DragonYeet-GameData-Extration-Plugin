@@ -13,17 +13,6 @@ void Main() {
     //closeResources();
 }
 
-bool filenameFlag = false;
-
 void Update(float dt) {
-    CTrackMania@ app = cast<CTrackMania>(GetApp());
-    if(app is null) { return; }
-
-    auto rootMap = cast<CGameCtnChallenge>(app.RootMap);
-    if (rootMap is null) { return; }
-    if (filenameFlag) { filenameFlag = false; return; }
-    filename = rootMap.MapInfo.FileName;
-    if (filename != "") {
-        filenameFlag = true;
-    }
+    SetFilenameFlag();
 }
