@@ -61,6 +61,7 @@ void collectAndWriteData() {
         isBraking = vehicle.InputIsBraking;
 
         print("test");
+        
 
         if (file.Size() > 0) {
             append_float_to_file(speed);
