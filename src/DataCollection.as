@@ -1,10 +1,24 @@
-
 void initializeFile(string filename) {
+    if (!IO::FolderExists(IO::FromStorageFolder("DragonYEET Saves"))) {
+        IO::CreateFolder(IO::FromStorageFolder("DragonYEET Saves"));
+    }
+
+    string baseFilename = filename;
+    int counter = 1;
+    filename += ".csv";
+
+    while (IO::FileExists(IO::FromStorageFolder("DragonYEET Saves/" + filename))) {
+        filename = baseFilename + "_" + counter + ".csv";
+        counter++;
+    }
+
+    IO::File file;
     file.Open(IO::FromStorageFolder("DragonYEET Saves/" + filename), IO::FileMode::Write);
-    log("File opened successfully for writing: `" + filename + "`", LogLevel::Info, 9);
+    log("File opened successfully for writing: `" + filename + "`", LogLevel::Info, 17);
     string headers = "Speed, FrontSpeed, PosX, PosY, PosZ, InputSteer, InputGasPedal, IsBraking, Acceleration, Jerk, AimYaw, AimPitch, AimRoll, FLSteerAngle, FRSteerAngle, FLSlipCoef, FRSlipCoef, EngineCurGear\n";
     file.Write(headers);
 }
+
 
 
 void collectAndWriteData() {
@@ -21,23 +35,23 @@ void collectAndWriteData() {
     bool getData = true;
     while (getData) {
         CTrackMania@ app = cast<CTrackMania>(GetApp());
-		if(app is null) { yield(); continue; }
+		if(app is null) { return; }
 
 		CSmArenaClient@ playground = cast<CSmArenaClient>(app.CurrentPlayground);
-        if(playground is null) { yield(); continue; }
+        if(playground is null) { return; }
         
         CSmArena@ arena = cast<CSmArena>(playground.Arena);
-        if(arena is null) { yield(); continue; }
-        if(arena.Players.Length <= 0) { yield(); continue; }
+        if(arena is null) { return; }
+        if(arena.Players.Length <= 0) { return; }
 
         CSmPlayer@ player = arena.Players[0];
-        if(player is null || arena.Players.Length == 0) { yield(); continue; }
+        if(player is null || arena.Players.Length == 0) { return; }
 
         CSmScriptPlayer@ api = cast<CSmScriptPlayer>(player.ScriptAPI); 
-        if(api is null) { yield(); continue; }
+        if(api is null) { return; }
 
         CSceneVehicleVisState@ vehicle = VehicleState::ViewingPlayerState();
-        if(vehicle is null) { yield(); continue; }
+        if(vehicle is null) { return; }
 
         speed = api.Speed;
         acceleration = speed - prev_speed;
@@ -115,7 +129,7 @@ void collectAndWriteData() {
             }
             */
 
-        yield();
+        return;
     }
 }
 

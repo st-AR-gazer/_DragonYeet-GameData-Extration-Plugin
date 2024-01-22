@@ -15,7 +15,7 @@ void RenderMenu() {
 	}
 }
 
-
+bool startFileEnabled;
 
 void Render() {
     if (!showInterface) { return; }
@@ -54,17 +54,29 @@ void Render() {
 
         UI::Separator();
         
-        if (UI::Button("Start Recording (file)")) { StartRecording(filename, classificationDoesHitRoof); }
-        UI::SameLine();
-        if (UI::Button("Stop Recording (file)")) { StopRecording(); }
+        if (startFileEnabled) {
+            UI::BeginDisabled();
+            if (UI::Button("Start Recording (file)")) { StartRecording(filename, classificationDoesHitRoof); startFileEnabled = false; }
+            UI::EndDisabled();
+            UI::SameLine();
+            if (UI::Button("Stop Recording (file)")) { StopRecording(); startFileEnabled = true; }
+        } else {
+            if (UI::Button("Start Recording (file)")) { StartRecording(filename, classificationDoesHitRoof); startFileEnabled = false; }
+            UI::SameLine();
+            UI::BeginDisabled();
+            if (UI::Button("Stop Recording (file)")) { StopRecording(); startFileEnabled = true; }
+            UI::EndDisabled();
+        }
 
         UI::Separator();
 
+        UI::BeginDisabled();
         if (UI::Button("Open Socket")) { openSocket(); }
         UI::SameLine(); 
         if (UI::Button("Close Socket")) { closeSocket(); }
-        
+
         if (UI::Button("Close Resoueces")) { closeResources(); }
+        UI::EndDisabled();
         UI::End();
     }
 }
@@ -75,11 +87,19 @@ void StartRecording(const string &in filename, const bool &in classificationDoes
         return;
     }
     initializeFile(filename);
+    log("File initialized successfully.", LogLevel::Info, 78);
     currentStatus = "Recording";
     collectAndWriteData();
 }
 
 void StopRecording() {
+    // if (file.IsOpen) {
+    //     file.Close();
+    //     log("File closed successfully.", LogLevel::Info, 86);
+    // }
+    file.Close();
+    log("File closed successfully.", LogLevel::Info, 86);
+
     currentStatus = "Idle";
 }
 
@@ -97,7 +117,7 @@ void SetFilenameFlag() {
     }
 
     if (!filenameFlag) {
-        filename = rootMap.MapInfo.FileName;
+        filename = rootMap.MapInfo.Name;
         if (filename != "") {
             filenameFlag = true;
         }
