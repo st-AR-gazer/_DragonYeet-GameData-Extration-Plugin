@@ -60,6 +60,8 @@ void collectAndWriteData() {
         prev_acceleration = acceleration;
         isBraking = vehicle.InputIsBraking;
 
+        print("test");
+
         if (file.Size() > 0) {
             append_float_to_file(speed);
             append_float_to_file(vehicle.FrontSpeed);
@@ -88,7 +90,7 @@ void collectAndWriteData() {
 
             file.Write("\n");
 
-            yield();
+            //yield();
         }
         /* more socket code to be added later
             if (sock !is null && isSocketOpen) {
