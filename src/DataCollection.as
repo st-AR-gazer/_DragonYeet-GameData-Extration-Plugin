@@ -90,7 +90,7 @@ void collectAndWriteData() {
 
             file.Write("\n");
 
-            yield();
+            //yield();
         }
         /* more socket code to be added later
             if (sock !is null && isSocketOpen) {
