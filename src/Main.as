@@ -8,11 +8,31 @@ IO::File file;
 Net::Socket@ sock;
 
 void Main() {
-    log("Starting data collection");
+    // log("Starting data collection");
     //collectAndWriteData();
     //closeResources();
 }
 
 void Update(float dt) {
-    SetFilenameFlag();
+    CTrackMania@ app = cast<CTrackMania>(GetApp());
+    if (app is null) return;
+    // 
+
+    auto playground = cast<CSmArenaClient>(app.CurrentPlayground);
+    if (playground is null || playground.Arena.Players.Length == 0) { return; }
+
+    auto scene = cast<ISceneVis@>(app.GameScene);
+    if (scene is null) return;
+
+    CSceneVehicleVis@ vis;
+    auto player = cast<CSmPlayer@>(playground.GameTerminals[0].GUIPlayer);
+    if (player !is null) {
+        @vis = VehicleState::GetVis(scene, player);
+    } else {
+        @vis = VehicleState::GetSingularVis(scene);
+    }
+    if (vis is null) return;
+
+    CheckAllHitboxes(vis.AsyncState.Position);
+    // SetFilenameFlag();
 }

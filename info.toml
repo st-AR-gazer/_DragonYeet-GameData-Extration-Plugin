@@ -5,4 +5,4 @@ version = "0.1.0"
 category = "Machine Learning"
 
 [script]
-dependencies = [ "VehicleState" ]
+dependencies = [ "VehicleState", "Camera" ]
