@@ -13,7 +13,15 @@ void Main() {
     //closeResources();
 }
 
+// Correct Update function
 void Update(float dt) {
+    // Correct instantiation of a Hitbox object
+    DrawHitbox(exampleHitbox);
+
+
+    // Correct instantiation of a Hitbox object
+
+
     CTrackMania@ app = cast<CTrackMania>(GetApp());
     if (app is null) return;
     // 
@@ -33,6 +41,8 @@ void Update(float dt) {
     }
     if (vis is null) return;
 
-    CheckAllHitboxes(vis.AsyncState.Position);
+    // CheckAllHitboxes(vis.AsyncState.Position);
     // SetFilenameFlag();
+
+    
 }

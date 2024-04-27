@@ -1,28 +1,18 @@
+// File: Hitbox.as
 class Hitbox {
-    vec3 min;
-    vec3 max;
+    vec3 position;
+    vec3 size;
     vec4 color;
-    array<vec4> sideColors;
 
-    Hitbox(const vec3 &in _min, const vec3 &in _max, const vec4 &in baseColor) {
-        min = _min;
-        max = _max;
-        color = baseColor;
-        GenerateSideColors();
+    Hitbox(const vec3 &in _pos, const vec3 &in _size, const vec4 &in _color) {
+        position = _pos;
+        size = _size;
+        color = _color;
     }
-
-    bool IsInside(const vec3 &in point) const {
-        return point.x >= min.x && point.x <= max.x &&
-               point.y >= min.y && point.y <= max.y &&
-               point.z >= min.z && point.z <= max.z;
-    }
-
-    void GenerateSideColors() {
-        float intensityFactor = 0.95;
-        sideColors.Resize(6);
-        for (uint i = 0; i < sideColors.Length; ++i) {
-            float factor = intensityFactor - i * 0.05;
-            sideColors[i] = vec4(color.x * factor, color.y * factor, color.z * factor, color.w);
-        }
+    
+    bool IsWithin(const vec3 &in point) {
+        return point.x >= position.x && point.x <= position.x + size.x &&
+               point.y >= position.y && point.y <= position.y + size.y &&
+               point.z >= position.z && point.z <= position.z + size.z;
     }
 }

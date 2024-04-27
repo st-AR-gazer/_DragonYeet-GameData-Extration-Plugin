@@ -1,59 +1,33 @@
+// File: Draw.as
 void DrawHitbox(const Hitbox &in hitbox) {
-    if (Camera::IsBehind(hitbox.min) && Camera::IsBehind(hitbox.max)) {
-        return;
-    }
+    vec3[] points(8);
+    
+    points[0] = hitbox.position;
+    points[1] = hitbox.position + vec3(hitbox.size.x, 0, 0);
+    points[2] = hitbox.position + vec3(0, hitbox.size.y, 0);
+    points[3] = hitbox.position + vec3(0, 0, hitbox.size.z);
+    points[4] = hitbox.position + vec3(hitbox.size.x, hitbox.size.y, 0);
+    points[5] = hitbox.position + vec3(hitbox.size.x, hitbox.size.y, hitbox.size.z);
+    points[6] = hitbox.position + vec3(0, hitbox.size.y, hitbox.size.z);
+    points[7] = hitbox.position + vec3(hitbox.size.x, 0, hitbox.size.z);
 
-    array<vec3> corners = {
-        hitbox.min,
-        vec3(hitbox.max.x, hitbox.min.y, hitbox.min.z),
-        hitbox.max,
-        vec3(hitbox.min.x, hitbox.max.y, hitbox.max.z),
-        vec3(hitbox.min.x, hitbox.min.y, hitbox.max.z),
-        vec3(hitbox.max.x, hitbox.max.y, hitbox.min.z),
-        vec3(hitbox.min.x, hitbox.max.y, hitbox.min.z),
-        vec3(hitbox.max.x, hitbox.min.y, hitbox.max.z)
-    };
+    int[] edges = {0, 1,  1, 4,  4, 2,  2, 0,  // Bottom square
+                3, 6,  6, 5,  5, 7,  7, 3,  // Top square
+                0, 3,  1, 7,  2, 6,  4, 5}; // Vertical lines
 
-    nvg::BeginPath();
+    for (uint i = 0; i < edges.Length; i += 2) {
+        if (Camera::IsBehind(points[edges[i]]) || Camera::IsBehind(points[edges[i + 1]]))
+            continue;
 
-    InitializeSidesArray();
+        vec2 p1 = Camera::ToScreenSpace(points[edges[i]]);
+        vec2 p2 = Camera::ToScreenSpace(points[edges[i + 1]]);
 
-    float intensityFactor = 0.95;
-
-    for (uint i = 0; i < sides.length(); ++i) {
-        vec2 screenPos1 = Camera::ToScreenSpace(corners[sides[i][0]]);
-        vec2 screenPos2 = Camera::ToScreenSpace(corners[sides[i][1]]);
-
-        float factor = intensityFactor + (i % sides[i].length()) * 0.05;
-        vec4 sideColor = vec4(hitbox.sideColors[0].x * factor, hitbox.sideColors[0].y * factor, hitbox.sideColors[0].z * factor, hitbox.sideColors[0].w);
-
+        nvg::StrokeColor(hitbox.color);
+        nvg::StrokeWidth(2.0f);
         nvg::BeginPath();
-        nvg::MoveTo(screenPos1);
-        nvg::LineTo(screenPos2);
-        nvg::StrokeColor(sideColor);
+        nvg::MoveTo(p1);
+        nvg::LineTo(p2);
         nvg::Stroke();
     }
 }
 
-array<array<int>> sides(12);
-
-void InitializeSidesArray() {
-    sides[0] = {0, 1}; // Bottom
-    sides[1] = {1, 3}; // Bottom
-    sides[2] = {3, 2}; // Bottom
-    sides[3] = {2, 0}; // Bottom
-    sides[4] = {4, 5}; // Top
-    sides[5] = {5, 7}; // Top
-    sides[6] = {7, 6}; // Top
-    sides[7] = {6, 4}; // Top
-    sides[8] = {0, 4}; // Vertical sides
-    sides[9] = {1, 5}; // Vertical sides
-    sides[10] = {3, 7}; // Vertical sides
-    sides[11] = {2, 6}; // Vertical sides
-}
-
-void RenderHitboxes(const array<Hitbox> &in hitboxes) {
-    for (uint i = 0; i < hitboxes.Length; ++i) {
-        DrawHitbox(hitboxes[i]);
-    }
-}
