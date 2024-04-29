@@ -1,6 +1,6 @@
 // File: Draw.as
 void DrawHitbox(const Hitbox &in hitbox) {
-    array<vec3> points = hitbox.GetTransformedPoints();
+    const array<vec3> points = hitbox.GetTransformedPoints();
 
     int[] edges = {0, 1,  1, 4,  4, 2,  2, 0,  // Bottom square
                    3, 6,  6, 5,  5, 7,  7, 3,  // Top square
