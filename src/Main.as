@@ -13,13 +13,14 @@ void Main() {
     //closeResources();
 }
 
-// Correct Update function
 void Update(float dt) {
-    // Correct instantiation of a Hitbox object
+    exampleHitbox.position = vec3(S_positionX, S_positionY, S_positionZ);
+    exampleHitbox.size = vec3(S_width, S_height, S_length);
+    
+    
     DrawHitbox(exampleHitbox);
-
-
-    // Correct instantiation of a Hitbox object
+    DrawDings();
+    // 
 
 
     CTrackMania@ app = cast<CTrackMania>(GetApp());

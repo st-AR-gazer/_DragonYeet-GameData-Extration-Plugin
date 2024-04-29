@@ -17,7 +17,7 @@ void RenderMenu() {
 
 bool startFileEnabled;
 
-void Render() {
+void RenderInterface() {
     if (!showInterface) { return; }
 
     int window_flags = UI::WindowFlags::NoCollapse | UI::WindowFlags::AlwaysAutoResize | UI::WindowFlags::NoDocking;
