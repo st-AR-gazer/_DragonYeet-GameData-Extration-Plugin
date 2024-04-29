@@ -26,7 +26,7 @@ int S_rotationY = 0;
 int S_rotationZ = 0;
 
 // Is done in Update() in Main.as
-// Hitbox exampleHitbox(vec3(S_positionX, S_positionY, S_positionZ), vec3(S_width, S_height, S_length), vec3(S_rotationX, S_rotationY, S_rotationZ), vec4(1, 1, 1, 1));
+Hitbox exampleHitbox(vec3(S_positionX, S_positionY, S_positionZ), vec3(S_width, S_height, S_length), vec3(S_rotationX, S_rotationY, S_rotationZ), vec4(1, 1, 1, 1));
 
 // South Korea (aka. South West?)
 Hitbox SouthKorea_hitboxBeforeRamp(vec3(-96, -11, -414), vec3(119, 7, 117), vec3(0, 0, 0), vec4(0.10, 0.7, 0.30, 0.4));
