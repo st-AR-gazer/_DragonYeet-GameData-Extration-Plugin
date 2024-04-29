@@ -18,7 +18,7 @@ class Hitbox {
                point.z >= position.z && point.z <= position.z + size.z;
     }
 
-    array<vec3> GetTransformedPoints() {
+    array<vec3> GetTransformedPoints() const {
         array<vec3> points(8);
         vec3 halfSize = size * 0.5f;
 
