@@ -5,10 +5,10 @@ class Hitbox {
     vec3 rotation;
     vec4 color;
 
-    Hitbox(const vec3 &in _pos, const vec3 &in _size, const vec3 &in _rotation, const vec4 &in _color) {
+    Hitbox(const vec3 &in _pos, const vec3 &in _size, const vec3 &in _rot, const vec4 &in _color) {
         position = _pos;
         size = _size;
-        rotation = _rotation;
+        rotation = _rot;
         color = _color;
     }
     
