@@ -17,7 +17,7 @@ void Update(float dt) {
     exampleHitbox.position = vec3(S_positionX, S_positionY, S_positionZ);
     exampleHitbox.size = vec3(S_width, S_height, S_length);
     exampleHitbox.rotation = vec3(S_rotationX, S_rotationY, S_rotationZ);
-    
+    exampleHitbox.color = vec4(S_colorR, S_colorG, S_colorB, S_colorA);
     
     DrawHitbox(exampleHitbox);
     DrawDings();

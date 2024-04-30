@@ -25,11 +25,38 @@ int S_rotationY = 0;
 [Setting name="Rotation Z" min="-180" max="180"]
 int S_rotationZ = 0;
 
+[Setting name="ColorR"]
+float S_colorR = 0.4;
+
+[Setting name="ColorG"]
+float S_colorG = 0.4;
+
+[Setting name="ColorB"]
+float S_colorB = 0.4;
+
+[Setting name="ColorA"]
+float S_colorA = 0.4;
+
 // Is done in Update() in Main.as
-Hitbox exampleHitbox(vec3(S_positionX, S_positionY, S_positionZ), vec3(S_width, S_height, S_length), vec3(S_rotationX, S_rotationY, S_rotationZ), vec4(1, 1, 1, 1));
+Hitbox exampleHitbox(vec3(S_positionX, S_positionY, S_positionZ), vec3(S_width, S_height, S_length), vec3(S_rotationX, S_rotationY, S_rotationZ), vec4(S_colorR, S_colorG, S_colorB, S_colorA));
 
 // South Korea (aka. South West?)
-Hitbox SouthKorea_hitboxBeforeRamp(vec3(-96, -11, -414), vec3(119, 7, 117), vec3(0, 0, 0), vec4(0.10, 0.7, 0.30, 0.4));
+Hitbox SouthKorea_hitboxBeforeRamp(vec3(-66, -8, -334), vec3(76, 7, 43), vec3(0, 23, 0), vec4(1, 0, 1, 0.7));
+Hitbox SouthKorea_hitboxOnRamp(vec3(-116, -3, -294), vec3(49, 15, 12), vec3(0, 28, 0), vec4(1, 0, 1, 0.7));
+
+Hitbox SouthKorea_hitboxFailZone_Back(vec3(-1042, 100, 232), vec3(33, 335, 531), vec3(0, 0, 0), vec4(1, 0, 0, 0.7));
+Hitbox SouthKorea_hitboxFailZone_BackSideStadiumDiagonal(vec3(-718, 100, -190), vec3(45, 335, 761), vec3(0, -58, 0), vec4(1, 0, 0, 0.7));
+Hitbox SouthKorea_hitboxFailZone_FrontSideStadiumDiagonal(vec3(-323, 100, 89), vec3(489, 350, 33), vec3(0, 10, 0), vec4(1, 0, 0, 0.7));
+Hitbox SouthKorea_hitboxFailZone_Middle(vec3(-661, 100, 539), vec3(809, 335, 33), vec3(0, -10, 0), vec4(1, 0, 0, 0.7));
+
+// India (aka. South East?)
+Hitbox India_hitboxBeforeRamp(vec3(-66, -8, 1869), vec3(76, 7, 43), vec3(0, -23, 0), vec4(1, 0, 1, 0.7));
+Hitbox India_hitboxOnRamp(vec3(-116, -3, 1829), vec3(49, 15, 12), vec3(0, -28, 0), vec4(1, 0, 1, 0.7));
+
+Hitbox India_hitboxFailZone_Back(vec3(-1042, 100, 1332), vec3(33, 335, 531), vec3(0, 0, 0), vec4(1, 0, 0, 0.7));
+Hitbox India_hitboxFailZone_BackSideStadiumDiagonal(vec3(-718, 100, 1754), vec3(45, 335, 761), vec3(0, 58, 0), vec4(1, 0, 0, 0.7));
+Hitbox India_hitboxFailZone_FrontSideStadiumDiagonal(vec3(-323, 100, 1463), vec3(489, 350, 33), vec3(0, -10, 0), vec4(1, 0, 0, 0.7));
+Hitbox India_hitboxFailZone_Middle(vec3(-661, 100, 1020), vec3(809, 335, 33), vec3(0, 10, 0), vec4(1, 0, 0, 0.7));
 
 
 
@@ -49,6 +76,11 @@ void Render() {
     S_rotationY = UI::InputInt("Rotation Y", S_rotationY);
     S_rotationZ = UI::InputInt("Rotation Z", S_rotationZ);
 
+    S_colorR = UI::InputFloat("ColorR", S_colorR);
+    S_colorG = UI::InputFloat("ColorG", S_colorG);
+    S_colorB = UI::InputFloat("ColorB", S_colorB);
+    S_colorA = UI::InputFloat("ColorA", S_colorA);
+
     if (UI::Button("Copy to Clipboard")) {
         string settings = 
             "vec3(" + S_positionX + ", " + S_positionY + ", " + S_positionZ + "), " + "vec3(" + S_width + ", " + S_height + ", " + S_length + "), " + "vec3(" + S_rotationX + ", " + S_rotationY + ", " + S_rotationZ + "), ";
@@ -63,26 +95,25 @@ void DrawDings() {
 
     // South Korea (aka. South West?)
     DrawHitbox(SouthKorea_hitboxBeforeRamp);
+    DrawHitbox(SouthKorea_hitboxOnRamp);
 
-
-
-
+    DrawHitbox(SouthKorea_hitboxFailZone_Back);
+    DrawHitbox(SouthKorea_hitboxFailZone_BackSideStadiumDiagonal);
+    DrawHitbox(SouthKorea_hitboxFailZone_FrontSideStadiumDiagonal);
+    DrawHitbox(SouthKorea_hitboxFailZone_Middle);
 
 
 
     // India (aka. South East?)
-    // DrawHitbox(India_hitboxBeforeRamp);
+    DrawHitbox(India_hitboxBeforeRamp);
+    DrawHitbox(India_hitboxOnRamp);
 
-    // DrawHitbox(India_hitboxOnRamp_Part1);
-    // DrawHitbox(India_hitboxOnRamp_Part2);
-    // DrawHitbox(India_hitboxOnRamp_Part3);
-    // DrawHitbox(India_hitboxOnRamp_Part4);
-    // DrawHitbox(India_hitboxOnRamp_Part5);
+    DrawHitbox(India_hitboxFailZone_Back);
+    DrawHitbox(India_hitboxFailZone_BackSideStadiumDiagonal);
+    DrawHitbox(India_hitboxFailZone_FrontSideStadiumDiagonal);
+    DrawHitbox(India_hitboxFailZone_Middle);
 
-    // DrawHitbox(India_hitboxAfterRamp_Part1);
-    // DrawHitbox(India_hitboxAfterRamp_Part2);
 
-    // DrawHitbox(India_mainHitbox);
 }
 
 
